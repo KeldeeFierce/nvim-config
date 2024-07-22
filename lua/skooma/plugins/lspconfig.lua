@@ -124,7 +124,7 @@ return {
 				})
 			end,
 			["bashls"] = function()
-				-- configure emmet language server
+				-- configure bash language server
 				lspconfig["bashls"].setup({
 					capabilities = capabilities,
 					filetypes = { "sh" },
