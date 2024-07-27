@@ -130,6 +130,20 @@ return {
 					filetypes = { "sh" },
 				})
 			end,
+			-- ["pyright"] = function()
+			-- 	-- configure bash language server
+			-- 	lspconfig["pyright"].setup({
+			-- 		capabilities = capabilities,
+			-- 		filetypes = { "python" },
+			-- 	})
+			-- end,
+			["jedi_language_server"] = function()
+				-- configure bash language server
+				lspconfig["jedi_language_server"].setup({
+					capabilities = capabilities,
+					filetypes = { "python" },
+				})
+			end,
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
