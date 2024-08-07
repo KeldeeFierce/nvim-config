@@ -23,8 +23,15 @@ return {
 			end,
 		})
 
-		vim.keymap.set("n", "<leader>l", function()
+		vim.keymap.set("n", "<leader>lt", function()
 			lint.try_lint()
+			print("linting linting")
+
+			local linters = lint.get_running()
+			if #linters == 0 then
+				print("󰦕")
+			end
+			print(table.concat(linters))
 		end, { desc = "Trigger linting for current file" })
 	end,
 }
