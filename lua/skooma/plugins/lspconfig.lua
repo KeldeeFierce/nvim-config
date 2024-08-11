@@ -130,20 +130,38 @@ return {
 					filetypes = { "sh" },
 				})
 			end,
-			-- ["pyright"] = function()
-			-- 	-- configure bash language server
-			-- 	lspconfig["pyright"].setup({
-			-- 		capabilities = capabilities,
-			-- 		filetypes = { "python" },
-			-- 	})
-			-- end,
-			["jedi_language_server"] = function()
+
+			["pyright"] = function()
 				-- configure bash language server
-				lspconfig["jedi_language_server"].setup({
+				lspconfig["pyright"].setup({
 					capabilities = capabilities,
 					filetypes = { "python" },
 				})
 			end,
+
+			-- ["basepyright"] = function()
+			-- 	-- configure bash language server
+			-- 	lspconfig["basedpyright"].setup({
+			-- 		capabilities = capabilities,
+			-- 		filetypes = { "python" },
+			-- 	})
+			-- end,
+			--
+			-- ["jedi_language_server"] = function()
+			-- 	-- configure bash language server
+			-- 	lspconfig["jedi_language_server"].setup({
+			-- 		capabilities = capabilities,
+			-- 		filetypes = { "python" },
+			-- 	})
+			-- end,
+
+			-- ["ruff-lsp"] = function()
+			-- 	-- configure bash language server
+			-- 	lspconfig["ruff-lsp"].setup({
+			-- 		capabilities = capabilities,
+			-- 		filetypes = { "python" },
+			-- 	})
+			-- end,
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
