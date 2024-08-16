@@ -10,10 +10,20 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
-			-- python = { "pylint" },
+			python = { "pylint" },
 			-- python = { "ruff" },
 			-- python = { "flake8" },
 			sh = { "shellcheck" },
+		}
+
+		local pylint = lint.linters.pylint
+		pylint.args = {
+			"-f",
+			"json",
+			"--disable=missing-module-docstring",
+			"--disable=missing-class-docstring",
+			"--disable=missing-function-docstring",
+			-- <- Add a new parameter here
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
