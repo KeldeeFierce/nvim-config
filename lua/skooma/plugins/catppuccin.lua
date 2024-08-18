@@ -33,7 +33,7 @@ return {
 			vim.cmd("colorscheme catppuccin")
 		end
 
-		vim.keymap.set("n", "<leader>qo", changebg_opaque)
-		vim.keymap.set("n", "<leader>qt", changebg_transperent)
+		vim.keymap.set("n", "<leader>to", changebg_opaque)
+		vim.keymap.set("n", "<leader>tt", changebg_transperent)
 	end,
 }
