@@ -51,6 +51,7 @@ return {
 				"eslint_d",
 				"shellcheck",
 				"luacheck",
+				"debugpy",
 			},
 		})
 	end,
