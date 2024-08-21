@@ -4,9 +4,29 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"mfussenegger/nvim-dap-python",
 		"nvim-neotest/nvim-nio",
+		"williamboman/mason.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
 		local dap, dapui = require("dap"), require("dapui")
+
+		require("mason-nvim-dap").setup({
+			-- Makes a best effort to setup the various debuggers with
+			-- reasonable debug configurations
+			automatic_installation = true,
+
+			-- You can provide additional configuration to the handlers,
+			-- see mason-nvim-dap README for more information
+			handlers = {},
+
+			-- You'll need to check that you have the required things installed
+			-- online, please don't ask me how to install them :)
+			ensure_installed = {
+				-- Update this to ensure that you have the debuggers for the langs you want
+				"cpptools",
+			},
+		})
+
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
@@ -21,67 +41,6 @@ return {
 		end
 
 		local py_db_path = "/home/dmitry/.local/share/nvim/mason/packages/debugpy/venv/bin/python3"
-
-		--cpptools
-
-		local cpp_db_path =
-			"/home/dmitry/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7" --cpptools
-
-		dap.adapters.cppdbg = {
-			id = "cppdbg",
-			type = "executable",
-			command = cpp_db_path,
-		}
-
-		dap.configurations.cpp = {
-			{
-				name = "Launch file",
-				type = "cppdbg",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-				cwd = "${workspaceFolder}",
-				stopAtEntry = true,
-			},
-			{
-				name = "Attach to gdbserver :1234",
-				type = "cppdbg",
-				request = "launch",
-				MIMode = "gdb",
-				miDebuggerServerAddress = "localhost:1234",
-				miDebuggerPath = "/usr/bin/gdb",
-				cwd = "${workspaceFolder}",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-			},
-		}
-
-		dap.configurations.c = {
-			{
-				name = "Launch file",
-				type = "cppdbg",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-				cwd = "${workspaceFolder}",
-				stopAtEntry = true,
-			},
-			{
-				name = "Attach to gdbserver :1234",
-				type = "cppdbg",
-				request = "launch",
-				MIMode = "gdb",
-				miDebuggerServerAddress = "localhost:1234",
-				miDebuggerPath = "/usr/bin/gdb",
-				cwd = "${workspaceFolder}",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-			},
-		}
 
 		-- require("dap-python").setup("python3") --Use local debugger
 		require("dap-python").setup(py_db_path) --Use Mason debugger
@@ -154,5 +113,7 @@ return {
 			local widgets = require("dap.ui.widgets")
 			widgets.centered_float(widgets.scopes)
 		end)
+
+		vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session result." })
 	end,
 }

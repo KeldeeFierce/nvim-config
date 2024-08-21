@@ -57,67 +57,118 @@ return {
 		-- 		end,
 		-- 	},
 		-- }
+		--
+		-- dap.configurations.c = dap.configurations.cpp
 
-		-- dap.configurations.c = {
+		--codelldb
+
+		-- local lldb_path = "/home/dmitry/.local/share/nvim/mason/bin/codelldb"
+		--
+		-- dap.adapters.codelldb = {
+		-- 	type = "server",
+		-- 	port = "${port}",
+		-- 	host = "127.0.0.1",
+		-- 	executable = {
+		-- 		command = lldb_path,
+		-- 		args = { "--port", "${port}" },
+		-- 	},
+		-- }
+		--
+		-- dap.configurations.cpp = {
 		-- 	{
 		-- 		name = "Launch file",
-		-- 		type = "cppdbg",
+		-- 		type = "codelldb",
 		-- 		request = "launch",
 		-- 		program = function()
 		-- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		-- 		end,
 		-- 		cwd = "${workspaceFolder}",
-		-- 		stopAtEntry = true,
+		-- 		stopOnEntry = false,
+		-- 		runInTerminal = false,
 		-- 	},
+		-- }
+		-- require("dap").set_log_level("DEBUG")
+		--
+		-- dap.configurations.c = dap.configurations.cpp
+		-- dap.configurations.rust = dap.configurations.cpp
+		--
+		-- dap.adapters.lldb = {
+		-- 	type = "executable",
+		-- 	command = lldb_path, -- adjust as needed, must be absolute path
+		-- 	name = "lldb",
+		-- }
+		-- local dap = require("dap")
+		-- dap.configurations.c = {
 		-- 	{
-		-- 		name = "Attach to gdbserver :1234",
-		-- 		type = "cppdbg",
+		-- 		name = "Launch",
+		-- 		type = "lldb",
 		-- 		request = "launch",
-		-- 		MIMode = "gdb",
-		-- 		miDebuggerServerAddress = "localhost:1234",
-		-- 		miDebuggerPath = "/usr/bin/gdb",
-		-- 		cwd = "${workspaceFolder}",
 		-- 		program = function()
 		-- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		-- 		end,
+		-- 		cwd = "${workspaceFolder}",
+		-- 		stopOnEntry = false,
+		-- 		args = {},
+		--
+		-- 		-- 💀
+		-- 		-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+		-- 		--
+		-- 		--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+		-- 		--
+		-- 		-- Otherwise you might get the following error:
+		-- 		--
+		-- 		--    Error on launch: Failed to attach to the target process
+		-- 		--
+		-- 		-- But you should be aware of the implications:
+		-- 		-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+		-- 		-- runInTerminal = false,
 		-- 	},
 		-- }
 
-		--lldb-dap
-
-		local lldb_path = "/home/dmitry/.local/share/nvim/mason/packages/codelldb/extension/lldb/bin/lldb"
-		dap.adapters.lldb = {
+		--gdb
+		dap.adapters.gdb = {
 			type = "executable",
-			command = lldb_path,
-			name = "lldb",
+			command = "gdb",
+			args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
 		}
-
 		dap.configurations.c = {
 			{
 				name = "Launch",
-				type = "lldb",
+				type = "gdb",
 				request = "launch",
 				program = function()
 					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 				end,
 				cwd = "${workspaceFolder}",
-				stopOnEntry = false,
-				args = {},
-
-				-- 💀
-				-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-				--
-				--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-				--
-				-- Otherwise you might get the following error:
-				--
-				--    Error on launch: Failed to attach to the target process
-				--
-				-- But you should be aware of the implications:
-				-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-				-- runInTerminal = false,
+				stopAtBeginningOfMainSubprogram = false,
+			},
+			{
+				name = "Select and attach to process",
+				type = "gdb",
+				request = "attach",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				pid = function()
+					local name = vim.fn.input("Executable name (filter): ")
+					return require("dap.utils").pick_process({ filter = name })
+				end,
+				cwd = "${workspaceFolder}",
+			},
+			{
+				name = "Attach to gdbserver :1234",
+				type = "gdb",
+				request = "attach",
+				target = "localhost:1234",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				cwd = "${workspaceFolder}",
 			},
 		}
+
+		--pydb
+
 		-- require("dap-python").setup("python3") --Use local debugger
 		require("dap-python").setup(py_db_path) --Use Mason debugger
 		require("dapui").setup()
