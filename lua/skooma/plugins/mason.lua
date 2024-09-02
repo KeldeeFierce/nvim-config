@@ -37,6 +37,9 @@ return {
 				"emmet_ls",
 				"prismals",
 				"clangd",
+				"bashls",
+				"intelephense",
+				"jedi_language_server",
 				-- "pyright",
 			},
 		})
