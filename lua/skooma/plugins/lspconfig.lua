@@ -131,6 +131,14 @@ return {
 				})
 			end,
 
+			["rust_analyzer"] = function()
+				-- configure bash language server
+				lspconfig["rust_analyzer"].setup({
+					capabilities = capabilities,
+					filetypes = { "rs" },
+				})
+			end,
+
 			["pyright"] = function()
 				-- configure bash language server
 				lspconfig["pyright"].setup({
