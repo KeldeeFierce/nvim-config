@@ -115,5 +115,12 @@ return {
 		end)
 
 		vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session result." })
+
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "dap-float",
+			callback = function()
+				vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
+			end,
+		})
 	end,
 }
