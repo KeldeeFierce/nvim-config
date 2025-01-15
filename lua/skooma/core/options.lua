@@ -30,3 +30,10 @@ opt.splitright = true
 opt.splitbelow = true
 
 opt.signcolumn = "yes"
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "dap-float",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
+	end,
+})
