@@ -56,7 +56,7 @@ return {
 				"shellcheck",
 				"luacheck",
 				"debugpy",
-				"cpptools",
+				-- "cpptools",
 			},
 		})
 	end,
