@@ -147,6 +147,34 @@ return {
 				})
 			end,
 
+			["ansiblels"] = function()
+				-- configure bash language server
+				lspconfig["ansiblels"].setup({
+					capabilities = capabilities,
+					settings = {
+						ansible = {
+							ansible = {
+								path = "ansible",
+							},
+							ansibleLint = {
+								enabled = true,
+								path = "ansible-lint",
+							},
+							executionEnvironment = {
+								enabled = false, -- Set to true if you use Ansible Execution Environments
+							},
+							python = {
+								interpreterPath = "python3",
+							},
+							completion = {
+								provideRedirectModules = true,
+								provideModuleOptionAliases = true,
+							},
+						},
+					},
+					filetypes = { "yaml.ansible" },
+				})
+			end,
 			-- ["basepyright"] = function()
 			-- 	-- configure bash language server
 			-- 	lspconfig["basedpyright"].setup({
