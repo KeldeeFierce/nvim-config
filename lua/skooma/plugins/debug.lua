@@ -40,7 +40,9 @@ return {
 			dapui.close()
 		end
 
-		local py_db_path = "/home/dmitry/.local/share/nvim/mason/packages/debugpy/venv/bin/python3"
+		local user = os.getenv("USER")
+		-- local py_db_path = "/home/skooma/.local/share/nvim/mason/packages/debugpy/venv/bin/python3"
+		local py_db_path = "/home/" .. user .. "/.local/share/nvim/mason/packages/debugpy/venv/bin/python3"
 
 		-- require("dap-python").setup("python3") --Use local debugger
 		require("dap-python").setup(py_db_path) --Use Mason debugger

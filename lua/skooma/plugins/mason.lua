@@ -27,9 +27,9 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver",
+				"ts_ls",
 				"html",
-				"cssls",
+				-- "csslsson",
 				"tailwindcss",
 				"svelte",
 				"lua_ls",
@@ -39,8 +39,8 @@ return {
 				"clangd",
 				"bashls",
 				"intelephense",
-				"jedi_language_server",
-				-- "pyright",
+				-- "jedi_language_server",
+				"pyright",
 			},
 		})
 
@@ -59,5 +59,14 @@ return {
 				-- "cpptools",
 			},
 		})
+
+		require("mason-lspconfig").setup({
+			automatic_enable = {
+				exclude = {
+					"rust_analyzer",
+				},
+			},
+		}
+)
 	end,
 }

@@ -1,5 +1,13 @@
 return {
 	"neovim/nvim-lspconfig",
+	opts = {
+		setup = {
+			rust_analyzer = function()
+				return true
+			end,
+		},
+	},
+
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
@@ -78,143 +86,143 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		mason_lspconfig.setup_handlers({
-			-- default handler for installed servers
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
-			["svelte"] = function()
-				-- configure svelte server
-				lspconfig["svelte"].setup({
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePost", {
-							pattern = { "*.js", "*.ts" },
-							callback = function(ctx)
-								-- Here use ctx.match instead of ctx.file
-								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-							end,
-						})
-					end,
-				})
-			end,
-			["graphql"] = function()
-				-- configure graphql language server
-				lspconfig["graphql"].setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-			["emmet_ls"] = function()
-				-- configure emmet language server
-				lspconfig["emmet_ls"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"html",
-						"typescriptreact",
-						"javascriptreact",
-						"css",
-						"sass",
-						"scss",
-						"less",
-						"svelte",
-					},
-				})
-			end,
-			["bashls"] = function()
-				-- configure bash language server
-				lspconfig["bashls"].setup({
-					capabilities = capabilities,
-					filetypes = { "sh" },
-				})
-			end,
-
-			["rust_analyzer"] = function()
-				-- configure bash language server
-				lspconfig["rust_analyzer"].setup({
-					capabilities = capabilities,
-					filetypes = { "rs" },
-				})
-			end,
-
-			["pyright"] = function()
-				-- configure bash language server
-				lspconfig["pyright"].setup({
-					capabilities = capabilities,
-					filetypes = { "python" },
-				})
-			end,
-
-			["ansiblels"] = function()
-				-- configure bash language server
-				lspconfig["ansiblels"].setup({
-					capabilities = capabilities,
-					settings = {
-						ansible = {
-							ansible = {
-								path = "ansible",
-							},
-							ansibleLint = {
-								enabled = true,
-								path = "ansible-lint",
-							},
-							executionEnvironment = {
-								enabled = false, -- Set to true if you use Ansible Execution Environments
-							},
-							python = {
-								interpreterPath = "python3",
-							},
-							completion = {
-								provideRedirectModules = true,
-								provideModuleOptionAliases = true,
-							},
-						},
-					},
-					filetypes = { "yaml.ansible" },
-				})
-			end,
-			-- ["basepyright"] = function()
-			-- 	-- configure bash language server
-			-- 	lspconfig["basedpyright"].setup({
-			-- 		capabilities = capabilities,
-			-- 		filetypes = { "python" },
-			-- 	})
-			-- end,
-			--
-			-- ["jedi_language_server"] = function()
-			-- 	-- configure bash language server
-			-- 	lspconfig["jedi_language_server"].setup({
-			-- 		capabilities = capabilities,
-			-- 		filetypes = { "python" },
-			-- 	})
-			-- end,
-
-			-- ["ruff-lsp"] = function()
-			-- 	-- configure bash language server
-			-- 	lspconfig["ruff-lsp"].setup({
-			-- 		capabilities = capabilities,
-			-- 		filetypes = { "python" },
-			-- 	})
-			-- end,
-			["lua_ls"] = function()
-				-- configure lua server (with special settings)
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
-			end,
-		})
+		-- mason_lspconfig.setup_handlers({
+		-- 	-- default handler for installed servers
+		-- 	function(server_name)
+		-- 		lspconfig[server_name].setup({
+		-- 			capabilities = capabilities,
+		-- 		})
+		-- 	end,
+		-- 	["svelte"] = function()
+		-- 		-- configure svelte server
+		-- 		lspconfig["svelte"].setup({
+		-- 			capabilities = capabilities,
+		-- 			on_attach = function(client, bufnr)
+		-- 				vim.api.nvim_create_autocmd("BufWritePost", {
+		-- 					pattern = { "*.js", "*.ts" },
+		-- 					callback = function(ctx)
+		-- 						-- Here use ctx.match instead of ctx.file
+		-- 						client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+		-- 					end,
+		-- 				})
+		-- 			end,
+		-- 		})
+		-- 	end,
+		-- 	["graphql"] = function()
+		-- 		-- configure graphql language server
+		-- 		lspconfig["graphql"].setup({
+		-- 			capabilities = capabilities,
+		-- 			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+		-- 		})
+		-- 	end,
+		-- 	["emmet_ls"] = function()
+		-- 		-- configure emmet language server
+		-- 		lspconfig["emmet_ls"].setup({
+		-- 			capabilities = capabilities,
+		-- 			filetypes = {
+		-- 				"html",
+		-- 				"typescriptreact",
+		-- 				"javascriptreact",
+		-- 				"css",
+		-- 				"sass",
+		-- 				"scss",
+		-- 				"less",
+		-- 				"svelte",
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- 	["bashls"] = function()
+		-- 		-- configure bash language server
+		-- 		lspconfig["bashls"].setup({
+		-- 			capabilities = capabilities,
+		-- 			filetypes = { "sh" },
+		-- 		})
+		-- 	end,
+		--
+		-- 	["rust_analyzer"] = function()
+		-- 		-- configure bash language server
+		-- 		lspconfig["rust_analyzer"].setup({
+		-- 			capabilities = capabilities,
+		-- 			filetypes = { "rs" },
+		-- 		})
+		-- 	end,
+		--
+		-- 	["pyright"] = function()
+		-- 		-- configure bash language server
+		-- 		lspconfig["pyright"].setup({
+		-- 			capabilities = capabilities,
+		-- 			filetypes = { "python" },
+		-- 		})
+		-- 	end,
+		--
+		-- 	["ansiblels"] = function()
+		-- 		-- configure bash language server
+		-- 		lspconfig["ansiblels"].setup({
+		-- 			capabilities = capabilities,
+		-- 			settings = {
+		-- 				ansible = {
+		-- 					ansible = {
+		-- 						path = "ansible",
+		-- 					},
+		-- 					ansibleLint = {
+		-- 						enabled = true,
+		-- 						path = "ansible-lint",
+		-- 					},
+		-- 					executionEnvironment = {
+		-- 						enabled = false, -- Set to true if you use Ansible Execution Environments
+		-- 					},
+		-- 					python = {
+		-- 						interpreterPath = "python3",
+		-- 					},
+		-- 					completion = {
+		-- 						provideRedirectModules = true,
+		-- 						provideModuleOptionAliases = true,
+		-- 					},
+		-- 				},
+		-- 			},
+		-- 			filetypes = { "yaml.ansible" },
+		-- 		})
+		-- 	end,
+		-- 	-- ["basepyright"] = function()
+		-- 	-- 	-- configure bash language server
+		-- 	-- 	lspconfig["basedpyright"].setup({
+		-- 	-- 		capabilities = capabilities,
+		-- 	-- 		filetypes = { "python" },
+		-- 	-- 	})
+		-- 	-- end,
+		-- 	--
+		-- 	-- ["jedi_language_server"] = function()
+		-- 	-- 	-- configure bash language server
+		-- 	-- 	lspconfig["jedi_language_server"].setup({
+		-- 	-- 		capabilities = capabilities,
+		-- 	-- 		filetypes = { "python" },
+		-- 	-- 	})
+		-- 	-- end,
+		--
+		-- 	-- ["ruff-lsp"] = function()
+		-- 	-- 	-- configure bash language server
+		-- 	-- 	lspconfig["ruff-lsp"].setup({
+		-- 	-- 		capabilities = capabilities,
+		-- 	-- 		filetypes = { "python" },
+		-- 	-- 	})
+		-- 	-- end,
+		-- 	["lua_ls"] = function()
+		-- 		-- configure lua server (with special settings)
+		-- 		lspconfig["lua_ls"].setup({
+		-- 			capabilities = capabilities,
+		-- 			settings = {
+		-- 				Lua = {
+		-- 					-- make the language server recognize "vim" global
+		-- 					diagnostics = {
+		-- 						globals = { "vim" },
+		-- 					},
+		-- 					completion = {
+		-- 						callSnippet = "Replace",
+		-- 					},
+		-- 				},
+		-- 			},
+		-- 		})
+		-- 	end,
+		-- })
 	end,
 }
