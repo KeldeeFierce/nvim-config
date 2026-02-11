@@ -14,6 +14,7 @@ return {
 			-- enable syntax highlighting
 			highlight = {
 				enable = true,
+				disable = { "dockerfile" },
 			},
 			-- enable indentation
 			indent = { enable = true, disable = { "python" } },

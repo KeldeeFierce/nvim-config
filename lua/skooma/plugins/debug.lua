@@ -91,7 +91,11 @@ return {
 				end,
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
-				args = {},
+				-- args = {},
+				args = function()
+					local input = vim.fn.input("Program arguments: ")
+					return vim.split(input, " ")
+				end,
 				-- ... the previous config goes here ...,
 				initCommands = function()
 					-- Find out where to look for the pretty printer Python module
