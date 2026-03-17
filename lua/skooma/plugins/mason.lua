@@ -41,6 +41,7 @@ return {
 				"intelephense",
 				-- "jedi_language_server",
 				"pyright",
+				"gopls",
 			},
 		})
 
@@ -66,7 +67,6 @@ return {
 					"rust_analyzer",
 				},
 			},
-		}
-)
+		})
 	end,
 }
