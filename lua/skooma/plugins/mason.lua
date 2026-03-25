@@ -42,6 +42,7 @@ return {
 				-- "jedi_language_server",
 				"pyright",
 				"gopls",
+				"taplo",
 			},
 		})
 
@@ -58,6 +59,7 @@ return {
 				"luacheck",
 				"debugpy",
 				-- "cpptools",
+				"ruff",
 			},
 		})
 

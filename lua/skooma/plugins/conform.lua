@@ -18,7 +18,7 @@ return {
 				graphql = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = { "black" },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
