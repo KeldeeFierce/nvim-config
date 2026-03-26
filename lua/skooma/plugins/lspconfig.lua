@@ -315,6 +315,15 @@ return {
 
 		vim.lsp.config("gopls", {
 			capabilities = capabilities,
+			-- settings = {
+			-- 	gopls = {
+			-- 		["ui.inlayhint.hints"] = {
+			-- 			compositeLiteralFields = false,
+			-- 			constantValues = false,
+			-- 			parameterNames = false,
+			-- 		},
+			-- 	},
+			-- },
 		})
 
 		vim.lsp.enable("gopls")
