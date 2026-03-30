@@ -43,4 +43,4 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	command = "setfiletype yaml.ansible",
 })
 
-vim.lsp.inlay_hint.enable(false)
+vim.lsp.inlay_hint.enable(true)
