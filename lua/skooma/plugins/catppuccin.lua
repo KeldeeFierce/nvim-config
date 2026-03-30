@@ -35,5 +35,14 @@ return {
 
 		vim.keymap.set("n", "<leader>to", changebg_opaque)
 		vim.keymap.set("n", "<leader>tt", changebg_transperent)
+
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				vim.api.nvim_set_hl(0, "LspInlayHint", {
+					fg = "#7c7c7c",
+					bg = "NONE",
+				})
+			end,
+		})
 	end,
 }
