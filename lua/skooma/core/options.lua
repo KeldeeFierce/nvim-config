@@ -48,3 +48,11 @@ vim.lsp.inlay_hint.enable(true)
 -- for inline diagnostics
 -- vim.diagnostic.config({ virtual_lines = true })
 -- vim.diagnostic.config({ virtual_text = true })
+
+vim.diagnostic.config({
+	virtual_text = {
+		spacing = 2,
+		prefix = "■",
+		severity = { min = vim.diagnostic.severity.ERROR },
+	},
+})
