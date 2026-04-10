@@ -44,3 +44,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 vim.lsp.inlay_hint.enable(true)
+
+-- for inline diagnostics
+-- vim.diagnostic.config({ virtual_lines = true })
+-- vim.diagnostic.config({ virtual_text = true })
