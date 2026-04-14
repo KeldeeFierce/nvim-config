@@ -42,7 +42,7 @@ return {
 				},
 			},
 		})
-		vim.keymap.set("n", "<leader>zz", function()
+		vim.keymap.set("n", "<leader>pp", function()
 			vim.cmd("NeoZoomToggle")
 		end, { silent = true, nowait = true })
 	end,
