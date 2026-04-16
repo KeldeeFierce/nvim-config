@@ -33,8 +33,24 @@ return {
 			vim.cmd("colorscheme catppuccin")
 		end
 
-		vim.keymap.set("n", "<leader>to", changebg_opaque)
-		vim.keymap.set("n", "<leader>tt", changebg_transperent)
+		local transperent = true
+		local function changebg()
+			transperent = not transperent
+			local catppuccin = require("catppuccin")
+			print(transperent)
+			catppuccin.setup({
+
+				flavour = "macchiato",
+				transparent_background = transperent,
+				no_italic = true,
+			})
+
+			vim.cmd("colorscheme catppuccin")
+		end
+
+		-- vim.keymap.set("n", "<leader>to", changebg_opaque)
+		-- vim.keymap.set("n", "<leader>tt", changebg_transperent)
+		vim.keymap.set("n", "<leader>tt", changebg)
 
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			callback = function()
