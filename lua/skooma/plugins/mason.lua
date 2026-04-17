@@ -60,6 +60,7 @@ return {
 				"debugpy",
 				-- "cpptools",
 				"ruff",
+				"delve",
 			},
 		})
 
