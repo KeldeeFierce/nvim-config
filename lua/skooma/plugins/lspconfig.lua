@@ -347,5 +347,10 @@ return {
 		-- 	capabilities = capabilities,
 		-- })
 		-- vim.lsp.enable("ruff")
+
+		vim.lsp.config("dockerls", {
+			capabilities = capabilities,
+		})
+		vim.lsp.enable("dockerls")
 	end,
 }
