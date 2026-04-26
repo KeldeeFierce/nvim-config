@@ -53,7 +53,7 @@ vim.diagnostic.config({
 	virtual_text = {
 		spacing = 2,
 		prefix = "■",
-		severity = { min = vim.diagnostic.severity.ERROR },
+		-- severity = { min = vim.diagnostic.severity.HINT },
 	},
 })
 

@@ -46,6 +46,8 @@ return {
 				"c",
 				"python",
 				"go",
+				"rust",
+				"sql",
 			},
 			incremental_selection = {
 				enable = true,

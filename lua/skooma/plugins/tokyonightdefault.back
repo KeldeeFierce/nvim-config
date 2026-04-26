@@ -3,42 +3,43 @@ return {
 	lazy = false,
 	priority = 1000,
 	config = function()
-		require("tokyonight").setup({
+		local tokyonight = require("tokyonight")
+		local transparent = false
+		tokyonight.setup({
 			style = "moon",
-			transparent = true,
+			transparent = transparent,
 			styles = {
-				comments = { italic = false },
-				keywords = { italic = false },
+				comments = { italic = true },
+				keywords = { italic = true },
 			},
 		})
-		vim.cmd("colorscheme tokyonight-moon")
+		vim.cmd("colorscheme tokyonight")
 
-		local transparent = true
+		-- vim.api.nvim_create_autocmd("ColorScheme", {
+		-- 	callback = function()
+		-- 		vim.api.nvim_set_hl(0, "LspInlayHint", {
+		-- 			fg = "#7c7c7c",
+		-- 			bg = "NONE",
+		-- 		})
+		-- 	end,
+		-- })
+
 		local function changebg()
 			transparent = not transparent
-			local tokyonight = require("tokyonight")
 			print(transparent)
 			tokyonight.setup({
 				style = "moon",
 				transperent = transparent,
 				styles = {
-					comments = { italic = false },
-					keywords = { italic = false },
+					comments = { italic = true },
+					keywords = { italic = true },
 				},
 			})
 
-			vim.cmd("colorscheme tokyonight-moon")
+			vim.cmd("colorscheme tokyonight")
 		end
 		--
 		vim.keymap.set("n", "<leader>tt", changebg)
 		--
-		vim.api.nvim_create_autocmd("ColorScheme", {
-			callback = function()
-				vim.api.nvim_set_hl(0, "LspInlayHint", {
-					fg = "#7c7c7c",
-					bg = "NONE",
-				})
-			end,
-		})
 	end,
 }
