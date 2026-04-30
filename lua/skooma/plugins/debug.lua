@@ -233,6 +233,11 @@ return {
 						name = "Attach remote",
 						mode = "remote",
 						request = "attach",
+
+						args = function()
+							local input = vim.fn.input("Program arguments: ")
+							return vim.split(input, " ")
+						end,
 					},
 				},
 				delve = {

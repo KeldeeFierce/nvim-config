@@ -19,6 +19,7 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "black" },
+				-- sql = { "sql-formatter" },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
