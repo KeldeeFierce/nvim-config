@@ -17,3 +17,4 @@ vim.keymap.set("n", "<leader>hh", function()
 end)
 
 vim.keymap.set("n", "<leader>rr", ":edit<CR>", { desc = "Reload buffer from disk" })
+-- vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "Code action" })
