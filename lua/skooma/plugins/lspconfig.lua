@@ -332,16 +332,31 @@ return {
 
 		vim.lsp.enable("gopls")
 
-		vim.lsp.config("pyright", {
-			capabilities = capabilities,
-		})
-		vim.lsp.enable("pyright")
+		-- vim.lsp.config("basedpyright", {
+		-- 	settings = {
+		-- 		basedpyright = {
+		-- 			analysis = {
+		-- 				autoSearchPaths = true,
+		-- 				useLibraryCodeForTypes = true,
+		-- 			},
+		-- 		},
+		-- 		python = {
+		-- 			venvPath = ".",
+		-- 			venv = ".venv",
+		-- 		},
+		-- 	},
+		-- })
 
-		vim.lsp.config("ruff", {
-			on_attach = function(client)
-				client.server_capabilities.hoverProvider = false
-			end,
-		})
+		-- vim.lsp.config("pyright", {
+		-- 	capabilities = capabilities,
+		-- })
+		-- vim.lsp.enable("pyright")
+		--
+		-- vim.lsp.config("ruff", {
+		-- 	on_attach = function(client)
+		-- 		client.server_capabilities.hoverProvider = false
+		-- 	end,
+		-- })
 
 		-- vim.lsp.config("ruff", {
 		-- 	capabilities = capabilities,

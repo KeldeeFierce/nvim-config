@@ -69,6 +69,13 @@ return {
 			end,
 		})
 
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "python",
+			callback = function()
+				vim.bo.indentexpr = ""
+			end,
+		})
+
 		--Disable some filetypes, shoud try it later
 		--
 		-- vim.api.nvim_create_autocmd("FileType", {

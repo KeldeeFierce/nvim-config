@@ -40,11 +40,12 @@ return {
 				"bashls",
 				"intelephense",
 				-- "jedi_language_server",
-				"pyright",
+				-- "pyright",
 				"gopls",
 				"taplo",
 				"dockerls",
 				"docker_compose_language_service",
+				"basedpyright",
 			},
 		})
 
@@ -52,10 +53,10 @@ return {
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				"isort", -- python formatter
+				-- "isort", -- python formatter
 				"black", -- python formatter
 				-- "pylint",
-				"flake8",
+				-- "flake8",
 				"eslint_d",
 				"shellcheck",
 				"luacheck",
