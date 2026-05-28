@@ -6,14 +6,14 @@ return {
 			options = {
 				theme = "auto",
 				icons_enabled = true,
-				-- component_separators = { left = "", right = "" },
-				component_separators = { left = " ▎", right = " ▎" },
+				component_separators = { left = "", right = "" },
+				-- component_separators = { left = " ▎", right = " ▎" },
 				-- arrows for kanagawa
 				-- section_separators = { left = "", right = "" },
 				-- squares for whatever
-				section_separators = { left = "", right = "" },
+				-- section_separators = { left = "", right = "" },
 				-- round for catpuccin
-				-- section_separators = { left = " ", right = "" },
+				section_separators = { left = " ", right = "" },
 				disabled_filetypes = {
 					"NvimTree",
 					statusline = {},
