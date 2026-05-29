@@ -332,6 +332,16 @@ return {
 
 		vim.lsp.enable("gopls")
 
+		-- vim.lsp.config("clangd", {
+		-- 	capabilities = capabilities,
+		-- 	cmd = {
+		-- 		"clangd",
+		-- 		"--fallback-style=microsoft",
+		-- 	},
+		-- })
+		--
+		-- vim.lsp.enable("clangd")
+
 		-- vim.lsp.config("basedpyright", {
 		-- 	settings = {
 		-- 		basedpyright = {
